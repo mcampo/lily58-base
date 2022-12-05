@@ -12,12 +12,13 @@ base_thickness = 0.9;
 // Height of the feet (usually silicon). Set this value to 0 if you will not use feet.
 feet_height = 1;
 // Diameter of the feet.
-feet_diameter = 12 + clearance * 2;
+feet_diameter = 12;
+feet_diameter_adjusted = feet_diameter + clearance * 2;
 // Height of the exposed part of the feet
 feet_exposure = 0.4;
 // Widht of the outer wall of the legs that create a "pocket" for the feet to fit in.
 leg_outer_wall_width = 0.8;
-leg_diameter = feet_diameter + leg_outer_wall_width * 2;
+leg_diameter = feet_diameter_adjusted + leg_outer_wall_width * 2;
 
 // Position of each of the legs. You will have to adjust these values if you change the dimensions of the feet/legs.
 leg_positions = [
@@ -131,7 +132,7 @@ module leg(position) {
     cube([leg_diameter * 2, leg_diameter * 2, 10]);
 
     translate([0, 0, -cut_extra])
-    cylinder(h = feet_height + cut_extra, d = feet_diameter);
+    cylinder(h = feet_height + cut_extra, d = feet_diameter_adjusted);
 
     translate([0, 0, -cut_extra])
     cylinder(h = feet_exposure + cut_extra, d = leg_diameter + cut_extra);
